@@ -53,6 +53,7 @@ find .. -depth \
   ! -path "../.git/*" \
   -name "*__PACKAGENAME__*" -print0 | while IFS= read -r -d '' file; do
     new=$(echo "$file" | sed "s/__PACKAGENAME__/$PACKAGENAME_SAFE_ESCAPED/g")
+    # fixme)) if the file being renamed is a directory, it'll just get put into a new directory, not renamed
     mkdir -p "$(dirname "$new")"
     mv "$file" "$new"
 done
@@ -79,22 +80,22 @@ fi
 echo "Done."
 
 
-# --- Remove git history ---
-echo
-read -p "Remove existing git history (.git folder)? (y/N): " confirm
+# # --- Remove git history ---
+# echo
+# read -p "Remove existing git history (.git folder)? (y/N): " confirm
 
-if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
-  rm -rf ../.git
-  echo "Removed .git directory."
+# if [[ "$confirm" == "y" || "$confirm" == "Y" ]]; then
+#   rm -rf ../.git
+#   echo "Removed .git directory."
 
-  read -p "Initialize a new git repository? (y/N): " init_confirm
-  if [[ "$init_confirm" == "y" || "$init_confirm" == "Y" ]]; then
-    (cd .. && git init)
-    echo "Initialized new git repository."
-  fi
-else
-  echo "Skipped removing .git."
-fi
+#   read -p "Initialize a new git repository? (y/N): " init_confirm
+#   if [[ "$init_confirm" == "y" || "$init_confirm" == "Y" ]]; then
+#     (cd .. && git init)
+#     echo "Initialized new git repository."
+#   fi
+# else
+#   echo "Skipped removing .git."
+# fi
 
 
 # --- Prompt to run devsetup.sh ---
