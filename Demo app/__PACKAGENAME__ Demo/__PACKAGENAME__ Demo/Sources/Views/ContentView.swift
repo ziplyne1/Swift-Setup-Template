@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  __PACKAGENAME__ Demo
-//
-//  Created by Pax Willoughby on 4/17/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
