@@ -2,6 +2,7 @@
 
 set -e
 
+echo ""
 echo "This script will ask you for a few parameters to fill out the template."
 echo "Please ensure it is being run from inside the 'Repo Setup – DELETEME' directory."
 echo "Note: this script uses macOS specific `sed -i ''` commands."
