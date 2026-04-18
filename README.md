@@ -1,5 +1,10 @@
+# Setup
+#### Look inside `Repo Setup - DELETEME`
+Run `setup_repository.sh`. (You may need to do `chmod +x`)  
+You can also use the JSON ruleset file there for GitHub.
+
 # __PACKAGENAME__
-A drop-in SwiftUI emoji picker.  
+A template for Swift packages.  
 Made with 💜 by [__USERNAME__](__PERSONALWEBSITE__).
 
 ![A GIF showing off the demonstration app](__PERSONALWEBSITE__)
@@ -14,7 +19,7 @@ https://github.com/__GITHUBUSERNAME__/__PACKAGENAME__
 ```
 
 ## Usage
-After importing __PACKAGENAME__, you can {{do lots of cool stuff with it}}:
+After importing __PACKAGENAME__, you can do lots of cool stuff with it:
 1. Use case one
 2. Use case two
 
@@ -39,4 +44,4 @@ All contributions are welcome. Please open a pull request and give a clear descr
 ### Building
 In order to keep the `.xcodeproj` of the demo app clean, please run the `devsetup.sh` script before building the app, as it configures local signing settings required for the demo app to build. It will create a file called `DeveloperSettings.xcconfig` which will not be committed to GitHub.
 
-You may need to run `chmod +x setup.sh` to make the script executable.
+You may need to run `chmod +x devsetup.sh` to make the script executable.
