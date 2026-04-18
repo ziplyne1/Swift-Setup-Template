@@ -31,24 +31,25 @@ FULLNAME_ESCAPED=$(escape "$FULLNAME")
 
 
 # --- Replace everywhere ---
+echo ""
 echo "Replacing global placeholders..."
 
 find .. -type f \
   ! -path "../.git/*" \
   ! -path "../Repo Setup - DELETEME/*" \
-  -print0 | while IFS= read -r -d '' file; do
-    sed -i '' \
-      -e "s/__PACKAGENAME__/$PACKAGENAME_SAFE_ESCAPED/g" \
-      -e "s/__USERNAME__/$USERNAME_ESCAPED/g" \
-      -e "s/__GITHUBUSERNAME__/$GITHUBUSERNAME_ESCAPED/g" \
-      -e "s|__PERSONALWEBSITE__|$PERSONALWEBSITE_ESCAPED|g" \
-      "$file"
+  -exec sed -i '' \
+    -e "s/__PACKAGENAME__/$PACKAGENAME_SAFE_ESCAPED/g" \
+    -e "s/__USERNAME__/$USERNAME_ESCAPED/g" \
+    -e "s/__GITHUBUSERNAME__/$GITHUBUSERNAME_ESCAPED/g" \
+    -e "s|__PERSONALWEBSITE__|$PERSONALWEBSITE_ESCAPED|g" \
+    {} +
 done
 
 find .. -depth \
   ! -path "../.git/*" \
   -name "*__PACKAGENAME__*" -print0 | while IFS= read -r -d '' file; do
     new=$(echo "$file" | sed "s/__PACKAGENAME__/$PACKAGENAME_SAFE_ESCAPED/g")
+    mkdir -p "$(dirname "$new")"
     mv "$file" "$new"
 done
 
