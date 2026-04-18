@@ -5,7 +5,7 @@ set -e
 echo ""
 echo "This script will ask you for a few parameters to fill out the template."
 echo "Please ensure it is being run from inside the 'Repo Setup – DELETEME' directory."
-echo "Note: this script uses macOS specific `sed -i ''` commands."
+echo "Note: this script uses macOS specific sed -i '' syntax."
 echo ""
 
 # --- Input ---
@@ -35,17 +35,20 @@ FULLNAME_ESCAPED=$(escape "$FULLNAME")
 echo ""
 echo "Replacing global placeholders..."
 
+echo "Replacing global placeholders..."
+
 find .. -type f \
   ! -path "../.git/*" \
   ! -path "../Repo Setup - DELETEME/*" \
-  -exec sed -i '' \
-    -e "s/__PACKAGENAME__/$PACKAGENAME_SAFE_ESCAPED/g" \
-    -e "s/__USERNAME__/$USERNAME_ESCAPED/g" \
-    -e "s/__GITHUBUSERNAME__/$GITHUBUSERNAME_ESCAPED/g" \
-    -e "s|__PERSONALWEBSITE__|$PERSONALWEBSITE_ESCAPED|g" \
-    {} +
+  -print0 | while IFS= read -r -d '' file; do
+    sed -i '' \
+      -e "s/__PACKAGENAME__/$PACKAGENAME_SAFE_ESCAPED/g" \
+      -e "s/__USERNAME__/$USERNAME_ESCAPED/g" \
+      -e "s/__GITHUBUSERNAME__/$GITHUBUSERNAME_ESCAPED/g" \
+      -e "s|__PERSONALWEBSITE__|$PERSONALWEBSITE_ESCAPED|g" \
+      "$file"
 done
-
+  
 find .. -depth \
   ! -path "../.git/*" \
   -name "*__PACKAGENAME__*" -print0 | while IFS= read -r -d '' file; do
