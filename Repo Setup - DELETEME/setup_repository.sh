@@ -35,11 +35,16 @@ validate_input() { # call like `validate_input input --suppress-space-warning`
     fi
 }
 
-validate_url() {
+validate_url() { # call like `validate_url url`
     url="$1"
     
+    if [[ "$url" == *[\|\&\$\\]* ]]; then
+        echo "Personal website url cannot contain | & or \\"
+        exit 1
+    fi
+    
     if [[ ! $url =~ ^https?://[^[:space:]]+\.[^[:space:]]+$ ]]; then
-        echo "Personal website URL is not valid"
+        echo "Personal website is not a valid URL"
         exit 1
     fi
 }
@@ -69,7 +74,7 @@ rename_all() { # call like `rename_all old new`
             # echo "Skipping binary: $file"
             continue
         fi
-        perl -i -pe "s/\Q$old\E/$new/g" "$file"
+        perl -i -pe "s|\Q$old\E|$new|g" "$file"
     done
     
     
@@ -139,6 +144,7 @@ rename_all() { # call like `rename_all old new`
 # ----------
 
 # __PACKAGENAME__     -> Project name (preferable no spaces)
+# __ORGID__           -> Organization id (like com.ziplyne)
 # __GITHUBUSERNAME__  -> GitHub-only
 # __USERNAME__        -> Normal online handle
 # __PERSONALWEBSITE__ -> like https://ziplyne.dev
@@ -151,20 +157,16 @@ echo "This script will ask for some values to be replaced inside all files, file
 echo "Press enter for the example option."
 echo ""
 
-read -p "Package name (e.g. MojiPicker): "              PACKAGENAME;     PACKAGENAME="${PACKAGENAME:-MojiPicker}"
-#echo "$PACKAGENAME"
-read -p "GitHub username (e.g. ziplyne1): "             GITHUBUSERNAME;  GITHUBUSERNAME="${GITHUBUSERNAME:-ziplyne1}"
-#echo "$GITHUBUSERNAME"
-read -p "Online username (e.g. ziplyne): "              USERNAME;        USERNAME="${USERNAME:-ziplyne}"
-#echo "$USERNAME"
-read -p "Personal website (e.g. https://ziplyne.dev): " PERSONALWEBSITE; PERSONALWEBSITE="${PERSONALWEBSITE:-https://ziplyne.dev}"
-#echo "$PERSONALWEBSITE"
-read -p "Full name (e.g. Pax Willoughby): "             FULLNAME;        FULLNAME="${FULLNAME:-Pax Willoughby}"
-#echo "$FULLNAME"
-read -p "Copyright year (e.g. 2026): "                  YEAR;            YEAR="${YEAR:-2026}"
-#echo "$YEAR"
+read -p "Package name (e.g. MojiPicker): "              PACKAGENAME;     PACKAGENAME="${PACKAGENAME:-MojiPicker}"#;                  echo "$PACKAGENAME"
+read -p "Organization identifier (e.g. com.ziplyne): "  ORGID;           ORGID="${USEORGIDRNAME:-com.ziplyne}"#;                     echo "$ORGID"
+read -p "GitHub username (e.g. ziplyne1): "             GITHUBUSERNAME;  GITHUBUSERNAME="${GITHUBUSERNAME:-ziplyne1}"#;              echo "$GITHUBUSERNAME"
+read -p "Online username (e.g. ziplyne): "              USERNAME;        USERNAME="${USERNAME:-ziplyne}"#;                           echo "$USERNAME"
+read -p "Personal website (e.g. https://ziplyne.dev): " PERSONALWEBSITE; PERSONALWEBSITE="${PERSONALWEBSITE:-https://ziplyne.dev}"#; echo "$PERSONALWEBSITE"
+read -p "Full name (e.g. Pax Willoughby): "             FULLNAME;        FULLNAME="${FULLNAME:-Pax Willoughby}"#;                    echo "$FULLNAME"
+read -p "Copyright year (e.g. 2026): "                  YEAR;            YEAR="${YEAR:-2026}"#;                                      echo "$YEAR"
 
 validate_input "$PACKAGENAME"
+validate_input "$ORGID"
 validate_input "$GITHUBUSERNAME"
 validate_input "$USERNAME"
 validate_url   "$PERSONALWEBSITE"
@@ -173,10 +175,11 @@ validate_input "$YEAR"
 
 rename_all "__PACKAGENAME__"     "$PACKAGENAME"
 rename_all "--PACKAGENAME--"     "$PACKAGENAME" # For stuff like bundle ids
+rename_all "YOURORGANIZATIONID"  "$ORGID"
 rename_all "__GITHUBUSERNAME__"  "$GITHUBUSERNAME"
 rename_all "__USERNAME__"        "$USERNAME"
 rename_all "__PERSONALWEBSITE__" "$PERSONALWEBSITE"
 rename_all "__FULLNAME__"        "$FULLNAME"
-perl -i -pe "s/\Q2026\E/$YEAR/g" "$ROOT_DIR/LICENSE" # Year should only be replaced inside LICENSE
+perl -i -pe "s|\Q2026\E|$YEAR|g" "$ROOT_DIR/LICENSE" # Year should only be replaced inside LICENSE
 
 # ----------
