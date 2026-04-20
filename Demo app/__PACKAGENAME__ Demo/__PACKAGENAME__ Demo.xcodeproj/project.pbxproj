@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		53E162762F93500B003CB08B /* ____ Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "____ Demo.app"; path = "__PACKAGENAME__ Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		53E162762F93500B003CB08B /* __PACKAGENAME__ Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "__PACKAGENAME__ Demo.app"; path = "__PACKAGENAME__ Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		53E162772F93500B003CB08B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				53E162762F93500B003CB08B /* ____ Demo.app */,
+				53E162762F93500B003CB08B /* __PACKAGENAME__ Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,7 +67,7 @@
 			packageProductDependencies = (
 			);
 			productName = "__PACKAGENAME__ Demo";
-			productReference = 53E162762F93500B003CB08B /* ____ Demo.app */;
+			productReference = 53E162762F93500B003CB08B /* __PACKAGENAME__ Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
