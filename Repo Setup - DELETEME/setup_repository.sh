@@ -158,7 +158,7 @@ echo "Press enter for the example option."
 echo ""
 
 read -p "Package name (e.g. MojiPicker): "              PACKAGENAME;     PACKAGENAME="${PACKAGENAME:-MojiPicker}"#;                  echo "$PACKAGENAME"
-read -p "Organization identifier (e.g. com.ziplyne): "  ORGID;           ORGID="${USEORGIDRNAME:-com.ziplyne}"#;                     echo "$ORGID"
+read -p "Organization identifier (e.g. com.ziplyne): "  ORGID;           ORGID="${ORGID:-com.ziplyne}"#;                             echo "$ORGID"
 read -p "GitHub username (e.g. ziplyne1): "             GITHUBUSERNAME;  GITHUBUSERNAME="${GITHUBUSERNAME:-ziplyne1}"#;              echo "$GITHUBUSERNAME"
 read -p "Online username (e.g. ziplyne): "              USERNAME;        USERNAME="${USERNAME:-ziplyne}"#;                           echo "$USERNAME"
 read -p "Personal website (e.g. https://ziplyne.dev): " PERSONALWEBSITE; PERSONALWEBSITE="${PERSONALWEBSITE:-https://ziplyne.dev}"#; echo "$PERSONALWEBSITE"
