@@ -60,6 +60,25 @@ find_items() { # call like `find_items f` or `find_items d`
         -print0
 }
 
+escape_bundle_id() { # call like `escape_bundle_id "$PACKAGENAME"`
+    local id="$1"
+    local preserve_dots=false
+    
+    if [[ "$id" == *"."* ]]; then
+        local preserve_dots_response
+        read -p "Preserve dots in bundle identifier? ($id) [y/N]: " preserve_dots_response
+        if [[ "$preserve_dots_response" =~ ^[yY]$ ]]; then
+            preserve_dots=true
+        fi
+    fi
+
+    if [[ "$preserve_dots" == true ]]; then
+        echo "$id" | tr '_' '-' | tr -cd '[:alnum:].-'
+    else
+        echo "$id" | tr '_' '-' | tr -cd '[:alnum:]-'
+    fi
+}
+
 rename_all() { # call like `rename_all old new`
     local old="$1"
     local new="$2"
@@ -173,8 +192,10 @@ validate_url   "$PERSONALWEBSITE"
 validate_input "$FULLNAME" --suppress-space-warning
 validate_input "$YEAR"
 
+BUNDLE_SAFE_PACKAGENAME="$(escape_bundle_id "$PACKAGENAME")"
+
 rename_all "__PACKAGENAME__"     "$PACKAGENAME"
-rename_all "--PACKAGENAME--"     "$PACKAGENAME" # For stuff like bundle ids
+rename_all "--PACKAGENAME--"     "$BUNDLE_SAFE_PACKAGENAME"
 rename_all "YOURORGANIZATIONID"  "$ORGID"
 rename_all "__GITHUBUSERNAME__"  "$GITHUBUSERNAME"
 rename_all "__USERNAME__"        "$USERNAME"
