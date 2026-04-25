@@ -1,7 +1,9 @@
 # Setup
-#### Look inside `Repo Setup - DELETEME`
-Run `setup_repository.sh`. (You may need to do `chmod +x`)  
-You can also use the JSON ruleset file there for GitHub.
+1. Open the `Repo Setup - DELETEME` directory
+2. Run `setup_repository.sh` (You may need to do `chmod +x`)
+3. Optionally apply the JSON ruleset to your repo on GitHub
+4. Delete the Repo Setup folder
+5. Delete this section from the README
 
 # __PACKAGENAME__
 A template for Swift packages.  
