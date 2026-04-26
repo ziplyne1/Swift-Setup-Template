@@ -15,7 +15,7 @@ read orgID
 
 cat <<file > Demo\ app/__PACKAGENAME__\ Demo/Resources/DeveloperSettings.xcconfig
 DEVELOPMENT_TEAM = $devTeamID
-PRODUCT_BUNDLE_IDENTIFIER = $orgID.mojipicker-demo
+PRODUCT_BUNDLE_IDENTIFIER = $orgID.lowercasedpackagename-demo
 file
 
 echo ""

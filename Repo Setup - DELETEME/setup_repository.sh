@@ -199,22 +199,28 @@ validate_url   "$PERSONALWEBSITE"
 validate_input "$FULLNAME" --suppress-space-warning
 validate_input "$YEAR"
 
+LOWERCASED_PACKAGENAME="$(echo "$PACKAGENAME" | tr '[:upper:]' '[:lower:]')"
 BUNDLE_SAFE_PACKAGENAME="$(escape_bundle_id "$PACKAGENAME")"
 
+if [[ ! "$string" =~ ^[a-z]+$ ]]; then
+    echo "Package Name couldn't be properly lowercased: '$LOWERCASED_PACKAGENAME'"
+    exit 1
+fi
 if [[ -z "$BUNDLE_SAFE_PACKAGENAME" || "$BUNDLE_SAFE_PACKAGENAME" == -* || "$BUNDLE_SAFE_PACKAGENAME" == *- ]]; then
     echo "Bundle-safe package name is invalid: '$BUNDLE_SAFE_PACKAGENAME'"
     exit 1
 fi
 
 
-rename_all "__PACKAGENAME__"     "$PACKAGENAME"
-rename_all "--PACKAGENAME--"     "$BUNDLE_SAFE_PACKAGENAME"
-rename_all "YOURORGANIZATIONID"  "$ORGID"
-rename_all "__GITHUBUSERNAME__"  "$GITHUBUSERNAME"
-rename_all "__USERNAME__"        "$USERNAME"
-rename_all "__PERSONALWEBSITE__" "$PERSONALWEBSITE"
-rename_all "__FULLNAME__"        "$FULLNAME"
-perl -i -pe "s|\Q2026\E|$YEAR|g" "$ROOT_DIR/LICENSE" # Year should only be replaced inside LICENSE
+rename_all "__PACKAGENAME__"       "$PACKAGENAME"
+rename_all "--PACKAGENAME--"       "$BUNDLE_SAFE_PACKAGENAME"
+rename_all "lowercasedpackagename" "$LOWERCASED_PACKAGENAME"
+rename_all "YOURORGANIZATIONID"    "$ORGID"
+rename_all "__GITHUBUSERNAME__"    "$GITHUBUSERNAME"
+rename_all "__USERNAME__"          "$USERNAME"
+rename_all "__PERSONALWEBSITE__"   "$PERSONALWEBSITE"
+rename_all "__FULLNAME__"          "$FULLNAME"
+perl -i -pe "s|\Q2026\E|$YEAR|g"   "$ROOT_DIR/LICENSE" # Year should only be replaced inside LICENSE
 
 echo ""
 echo "Done!"
