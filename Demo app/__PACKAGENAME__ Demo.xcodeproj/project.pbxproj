@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		53E162762F93500B003CB08B /* __PACKAGENAME__ Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "__PACKAGENAME__ Demo.app"; path = "__PACKAGENAME__ Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		53E162762F93500B003CB08B /* __PACKAGENAME__ Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "__PACKAGENAME__ Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -127,6 +127,8 @@
 /* Begin XCBuildConfiguration section */
 		53E162952F93500C003CB08B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 53E162782F93500B003CB08B /* __PACKAGENAME__ Demo */;
+			baseConfigurationReferenceRelativePath = Resources/DeveloperSettings.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -188,6 +190,8 @@
 		};
 		53E162962F93500C003CB08B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 53E162782F93500B003CB08B /* __PACKAGENAME__ Demo */;
+			baseConfigurationReferenceRelativePath = Resources/DeveloperSettings.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -241,6 +245,8 @@
 		};
 		53E162982F93500C003CB08B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 53E162782F93500B003CB08B /* __PACKAGENAME__ Demo */;
+			baseConfigurationReferenceRelativePath = Resources/DeveloperSettings.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -283,6 +289,8 @@
 		};
 		53E162992F93500C003CB08B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 53E162782F93500B003CB08B /* __PACKAGENAME__ Demo */;
+			baseConfigurationReferenceRelativePath = Resources/DeveloperSettings.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
